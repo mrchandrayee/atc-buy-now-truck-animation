@@ -1,0 +1,28 @@
+<!-- Video-visible HTML excerpt -->
+<button id="atc">
+  Buy Now
+  <svg class="atc__cart"/>
+</button>
+
+<!-- becomes a truck → -->
+<div class="truck">
+  <svg viewBox="0 0 172 96">…</svg>
+</div>
+
+<div class="confirm">
+  Ordered ✓
+</div>
+
+/* Video-visible CSS excerpt */
+.truck   { z-index: 3; }
+.confirm { z-index: 1; }
+
+/* Label → cart */
+.is-packing .atc__label {
+  opacity: 0;
+}
+
+/* wheels roll on drive */
+.is-rolling .wheel__spin {
+  animation: roll .34s linear infinite;
+}

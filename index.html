@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Buy Now → Ordered — Truck Button Animation</title><link rel="stylesheet" href="styles.css"></head>
+<body>
+<header class="browser-bar"><div class="traffic"><i></i><i></i><i></i></div><div class="site-title"><span class="mini-logo">●</span> Buy Now + truck</div><span class="host">localhost / atc</span><button class="cart-indicator" aria-label="Cart">♧</button></header>
+<main class="stage">
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <div class="demo">
+    <button id="atc" class="atc" type="button" aria-label="Buy now">
+      <span class="atc__label"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3h2l1.3 7.1h7.2l1.4-5.2H4.5M6.2 12.4a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8Zm5.2 0a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8Z"/></svg>Buy Now</span>
+      <svg class="atc__cart" viewBox="0 0 28 24" aria-hidden="true"><path d="M2 3h3l2.3 12h14l3-9H7M10 19a1.7 1.7 0 1 0 0 3.4 1.7 1.7 0 0 0 0-3.4Zm9 0a1.7 1.7 0 1 0 0 3.4 1.7 1.7 0 0 0 0-3.4Z"/></svg>
+      <span class="atc__shine"></span>
+    </button>
+    <div class="confirm"><span class="check">✓</span><span>Ordered</span></div>
+    <div class="truck" aria-hidden="true">
+      <svg viewBox="0 0 172 96" role="img">
+        <g class="truck__body">
+          <rect x="8" y="18" width="92" height="51" rx="8" fill="#ff7048"/>
+          <path d="M100 35h29l23 21v13h-52z" fill="#f34f2e"/>
+          <path d="M111 40h15l15 15h-30z" fill="#d9f0ed"/>
+          <rect x="15" y="25" width="78" height="37" rx="4" fill="#ff885f"/>
+          <rect x="20" y="30" width="20" height="14" rx="2" fill="#fff0d9"/>
+          <rect x="45" y="30" width="20" height="14" rx="2" fill="#fff0d9"/>
+          <rect x="20" y="48" width="20" height="9" rx="2" fill="#fff0d9"/>
+          <rect x="45" y="48" width="20" height="9" rx="2" fill="#fff0d9"/>
+          <path d="M100 65h54v5H100z" fill="#c73c27"/>
+          <circle cx="39" cy="70" r="12" fill="#252b2a"/><circle cx="39" cy="70" r="5" fill="#d7d9d4"/>
+          <circle cx="130" cy="70" r="12" fill="#252b2a"/><circle cx="130" cy="70" r="5" fill="#d7d9d4"/>
+          <g class="wheel__spin"><path d="M39 61v18M30 70h18M130 61v18M121 70h18" stroke="#89918d" stroke-width="1.5"/></g>
+          <path d="M8 24h8M8 31h8" stroke="#fff1d9" stroke-width="2" stroke-linecap="round"/>
+        </g>
+      </svg>
+    </div>
+    <div class="hint" id="hint">Click to place your order</div>
+    <button class="replay" id="replay" hidden>↻ Try again</button>
+  </div>
+</main>
+<section class="code-dock" aria-label="Source code preview">
+  <article class="code-card"><div class="code-head"><span class="orange-dot"></span> index.html <small>HTML</small></div><pre><code><span class="tag">&lt;button</span> <span class="attr">id="atc"</span><span class="tag">&gt;</span>
+  Buy Now
+  <span class="tag">&lt;svg</span> <span class="attr">class="atc__cart"</span><span class="tag">/&gt;</span>
+<span class="tag">&lt;/button&gt;</span>
+
+<span class="comment">&lt;!-- becomes a truck → --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">class="truck"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;svg</span> <span class="attr">viewBox="0 0 172 96"</span><span class="tag">&gt;</span>…<span class="tag">&lt;/svg&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+
+<span class="tag">&lt;div</span> <span class="attr">class="confirm"</span><span class="tag">&gt;</span>
+  Ordered ✓
+<span class="tag">&lt;/div&gt;</span></code></pre></article>
+  <article class="code-card"><div class="code-head"><span class="blue-dot"></span> style.css <small>CSS</small></div><pre><code><span class="selector">.truck</span>   { z-index: 3; }
+<span class="selector">.confirm</span> { z-index: 1; }
+
+<span class="comment">/* Label → cart */</span>
+<span class="selector">.is-packing .atc__label</span> {
+  opacity: 0;
+}
+
+<span class="comment">/* wheels roll on drive */</span>
+<span class="selector">.is-rolling .wheel__spin</span> {
+  animation: roll .34s linear
+    infinite;
+}
+
+<span class="selector">.is-ordered .confirm</span> {
+  opacity: 1;
+}</code></pre></article>
+  <article class="code-card"><div class="code-head"><span class="orange-dot"></span> app.js <small>JS</small></div><pre><code><span class="kw">const</span> atc = document.querySelector(
+  <span class="string">'#atc'</span>
+);
+
+<span class="kw">function</span> <span class="fn">order</span>() {
+  atc.classList.add(<span class="string">'is-packing'</span>);
+  <span class="comment">// cart packs, truck drives</span>
+  setTimeout(() =&gt; {
+    document.body.classList.add(
+      <span class="string">'is-rolling'</span>
+    );
+  }, <span class="num">650</span>);
+  setTimeout(() =&gt; {
+    document.body.classList.add(
+      <span class="string">'is-ordered'</span>
+    );
+  }, <span class="num">2300</span>);
+}</code></pre></article>
+</section>
+<script src="app.js"></script></body></html>
